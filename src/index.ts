@@ -1,11 +1,8 @@
 import http from 'node:http';
-import cluster from 'node:cluster';
-import os from 'node:os';
 
 import dotenv from 'dotenv';
 
 import { writeFile } from './utils/fileOperations';
-import { sendResponse } from './utils/responseHandler';
 import { launchRouter } from './utils/router';
 
 dotenv.config();
@@ -17,7 +14,6 @@ const modeArgs = process.argv.find(item => item.startsWith('--mode'));
 const mode = modeArgs?.slice(7);
 
 const workers: any[] = [];
-let nextWorker = 0;
 
 try {
     if (mode !== 'multi') {
